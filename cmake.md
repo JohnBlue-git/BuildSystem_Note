@@ -1,3 +1,27 @@
+
+## CMake
+
+structure
+```console
+build
+include
+src
+CMakeLists.txt
+```
+
+command to build
+```console
+cd build
+# generate Makefile
+cmake .. -D<define variable>=<value>
+# make
+make
+make install
+
+# New in cmake version 3.24
+cmake .. --fresh 
+```
+
 ## CMake Variables
 - Pre-defined variable
 - Normal variable
@@ -182,4 +206,142 @@ install(FILES file.conf
                 GROUP_READ
                 WORLD_READ
 )
+```
+
+## CMake Fetch & FindPackage
+
+### CMake Fetch
+
+How to install library via fetch
+
+```console
+# Find google test
+find_package(GTest REQUIRED)
+
+# Fetch and Build
+if (NOT GTest_FOUND)
+    # Download and install GoogleTest
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG        release-1.11.0
+    )
+
+    # CMake does not define BUILD_SHARED_LIBS by default, but projects often create a cache entry for it using the option()
+    # Set BUILD_SHARED_LIBS on top level to bring it to the subdirectory
+    option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
+    # Re-set BUILD_SHARED_LIBS if neccessary
+    #set(BUILD_SHARED_LIBS OFF)
+    #message(STATUS "shared ${BUILD_SHARED_LIBS}")
+
+    # Method 1: Make available
+    FetchContent_MakeAvailable(googletest)
+
+    # Method 2: Subdirectory
+    # Populate the content
+    #FetchContent_Populate(googletest)
+    # Add GoogleTest as a subdirectory
+    #add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+endif()
+```
+
+### find_package()
+
+In CMake, there are two mode to include library variables:
+
+- Module mode： \
+  It is the default mode. CMake official will install and defind a list of Find<LibaryName>.cmake in /usr/share/cmake-<version>/Modules (when install CMake onto the Linux), and those configuration can help us to include the libraries with ease.
+
+- Config mode： \
+  For non-official predfined libraries, we have to include the library using config mode. CMake will enter config mode when module mode fail or under setting to config mode in find_package().
+
+### What does .cmake include ?
+
+- Neccessary variable:
+* <LibaryName>_FOUND
+* <LibaryName>_INCLUDE_DIR
+* <LibaryName>_INCLUDES or <LibaryName>_LIBRARY or <LibaryName>_LIBRARIES
+
+- Addiitonal variable:
+* version
+* debug or release
+* namespace
+* ...
+```console
+# Example of .cmake files
+# glog (non-official)
+# /usr/local/include/glog/
+#
+# glog/glog-modules.cmake
+# glog-config.cmake
+# glog-config-version.cmake
+# glog-targets.cmake
+# glog-targets-noconfig.cmake or targets-release.cmake
+
+
+# Basic usage
+find_package(<library>)
+# If library is a must
+find_package(<library> REQUIRED)
+# Config mode
+find_package(<library> CONFIG REQUIRED)
+# Restrict version and components
+# 1.79 specific the version 
+# COMPONENTS date_time specifies that you are interested in. Boost is a collection of libraries, and each library is organized into components.
+find_package(Boost 1.79 COMPONENTS date_time)
+
+
+# Example of usage
+find_package(<library>)
+
+add_executable(app app.c)
+
+if(CURL_FOUND)
+    target_include_directories(app PRIVATE ${<library>_INCLUDE_DIR})
+    target_link_libraries(app ${<library>_LIBRARY})
+else(CURL_FOUND)
+    message(FATAL_ERROR ”<library> library not found”)
+endif(CURL_FOUND)
+```
+
+### Exampele of self-defined .cmake files
+directory tree
+```console
+├── lib<...>.c
+├── lib<...>.h
+├── Makefile
+└── test
+    ├── addtest.c
+    ├── cmake
+    │   └── FindADD.cmake
+    └── CMakeLists.txt
+```
+CMakeLists.txt
+```console
+cmake_minimum_required(VERSION 3.16)
+project(test)
+
+# for find_pakcage() to find our self-defined library
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake;${CMAKE_MODULE_PATH}")
+
+add_executable(addtest addtest.cc)
+
+find_package(<...>)
+if (<...>_FOUND)
+    target_include_directories(addtest PRIVATE ${<...>_INCLUDE_DIR})
+    target_link_libraries(addtest ${<...>_LIBRARY})
+else ()
+    message(FATAL_ERROR "<...> library not found")
+endif ()
+```
+Find<...>.cmake
+```console
+find_path(<...>_INCLUDE_DIR lib<...>.h /usr/include/ /usr/local/include ${CMAKE_SOURCE_DIR}/ModuleMode)
+
+find_library(<...>_LIBRARY lib<...>.a lib<...>.so /usr/lib/ /usr/local/lib/ ${CMAKE_SOURCE_DIR}/ModuleMode)
+
+if (<...>_INCLUDE_DIR AND <...>_LIBRARY)
+	set(<...>_FOUND TRUE)
+endif (<...>_INCLUDE_DIR AND <...>_LIBRARY)
 ```
