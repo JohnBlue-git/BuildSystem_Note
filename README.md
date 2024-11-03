@@ -88,33 +88,33 @@ https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
 ## Makefile VS CMake VS Meson VS Ninja VS Autotools
 
 ### Brief History
-Makefile:
-- Origin: Developed in 1976 by Stuart Feldman at Bell Labs.
-- Purpose: Automates the build process by defining a set of tasks to be executed.
-- Usage: Widely used in Unix-based systems for compiling and linking programs.
-Autotools:
-- Origin: Introduced in the early 1990s.
-- Components: Includes Autoconf, Automake, and Libtool.
-- Purpose: Provides a suite of tools to make source code packages portable to many Unix-like systems.
-CMake:
-- Origin: Created in 2000 by Kitware.
-- Purpose: A cross-platform tool that generates native build scripts for various platforms.
-- Usage: Popular in open-source projects and supports multiple build systems like Make and Ninja.
-Ninja:
-- Origin: Developed by Evan Martin in 2012.
-- Purpose: Focuses on speed and efficiency, designed to run builds as fast as possible.
-- Usage: Often used as a backend for CMake.
-Meson:
-- Origin: Introduced in 2012 by Jussi Pakkanen.
-- Purpose: Aims to provide a fast and user-friendly build system.
-- Usage: Known for its simplicity and speed, often used with Ninja as the backend.
-Popularity Comparison:
-- Makefile: Still widely used, especially in legacy systems and simple projects. Its simplicity and direct control over the build process make it a staple in many Unix environments.
-- Autotools: While powerful and flexible, it has a steep learning curve and is considered somewhat outdated. Its usage has declined in favor of more modern tools.
-- CMake: Extremely popular due to its cross-platform capabilities and support for various IDEs and build systems. It is the go-to choice for many open-source projects.
-- Ninja: Known for its speed, it is often used in conjunction with CMake. Its popularity is growing, especially in projects where build speed is critical.
-- Meson: Gaining traction for its simplicity and performance. It is becoming a popular choice for new projects, particularly in the open-source community.
-In terms of current popularity, CMake and Ninja are leading the pack, with Meson quickly catching up12Makefile remains a fundamental tool, especially in Unix environments, while Autotools is less favored due to its complexity and age
+- Makefile:
+  - Origin: Developed in 1976 by Stuart Feldman at Bell Labs.
+  - Purpose: Automates the build process by defining a set of tasks to be executed.
+  - Usage: Widely used in Unix-based systems for compiling and linking programs.
+- Autotools:
+  - Origin: Introduced in the early 1990s.
+  - Components: Includes Autoconf, Automake, and Libtool.
+  - Purpose: Provides a suite of tools to make source code packages portable to many Unix-like systems.
+- CMake:
+  - Origin: Created in 2000 by Kitware.
+  - Purpose: A cross-platform tool that generates native build scripts for various platforms.
+  - Usage: Popular in open-source projects and supports multiple build systems like Make and Ninja.
+- Ninja:
+  - Origin: Developed by Evan Martin in 2012.
+  - Purpose: Focuses on speed and efficiency, designed to run builds as fast as possible.
+  - Usage: Often used as a backend for CMake.
+- Meson:
+  - Origin: Introduced in 2012 by Jussi Pakkanen.
+  - Purpose: Aims to provide a fast and user-friendly build system.
+  - Usage: Known for its simplicity and speed, often used with Ninja as the backend.
+- Popularity Comparison:
+  - Makefile: Still widely used, especially in legacy systems and simple projects. Its simplicity and direct control over the build process make it a staple in many Unix environments.
+  - Autotools: While powerful and flexible, it has a steep learning curve and is considered somewhat outdated. Its usage has declined in favor of more modern tools.
+  - CMake: Extremely popular due to its cross-platform capabilities and support for various IDEs and build systems. It is the go-to choice for many open-source projects.
+  - Ninja: Known for its speed, it is often used in conjunction with CMake. Its popularity is growing, especially in projects where build speed is critical.
+  - Meson: Gaining traction for its simplicity and performance. It is becoming a popular choice for new projects, particularly in the open-source community.
+  In terms of current popularity, CMake and Ninja are leading the pack, with Meson quickly catching up12Makefile remains a fundamental tool, especially in Unix environments, while Autotools is less favored due to its complexity and age
 
 
 ### Will Makefile script be different from OS to OS ?
