@@ -1,4 +1,31 @@
 
+## Meson
+
+structure
+```console
+build
+include
+src
+meson.build
+meson.options
+```
+
+command to build
+```console
+# generate ...
+meson build -D<define variable>=<value>
+# ninja
+cd build
+ninja
+ninja install
+
+# to setup and install dependency before build
+meson setup build
+
+# force to refresh
+meson setup --reconfigure build
+```
+
 ## Meson variable
 
 ### project() with compile options
