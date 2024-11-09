@@ -171,9 +171,9 @@ add_dependencies(lib2 lib1)
 ## Installation settings
 
 The default installation prefix would usually be "/usr/local"; the executables and dlls would be placed in "/usr/local/bin"; and the header files' folder would be placed in "/usr/local/include" \
-and here are the common modfier for installation: \
-- **ARCHIVE**: static libraries .a \
-- **LIBRARY**: shared libraries .so \
+and here are the common modfier for installation:
+- **ARCHIVE**: static libraries .a
+- **LIBRARY**: shared libraries .so
 - **RUNTIME**: executables and dlls
 ```console
 install(TARGETS <program>
