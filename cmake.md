@@ -345,3 +345,6 @@ if (<...>_INCLUDE_DIR AND <...>_LIBRARY)
 	set(<...>_FOUND TRUE)
 endif (<...>_INCLUDE_DIR AND <...>_LIBRARY)
 ```
+
+## CMake Extermal project
+[cmake_external_proj.md](./cmake_external_proj.md)
