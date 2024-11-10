@@ -3,10 +3,10 @@
 
 folder structure
 ```console
-build
-include
-src
-CMakeLists.txt
+├── build
+├── include
+├── src
+└── CMakeLists.txt
 ```
 
 command to build

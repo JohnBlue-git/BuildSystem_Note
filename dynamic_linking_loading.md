@@ -6,6 +6,7 @@ To do dynamic linking, we create share library (.so).
 To do dynamic loading, we use dlopen() to load the share library.
 
 ### Create Shared Library
+
 my_shared_lib.c:
 ``` C
 #include <stdio.h>
@@ -14,7 +15,8 @@ void hello() {
     printf("Hello from the shared library!\n");
 }
 ```
-Compile this file into a shared library
+
+compile this file into a shared library
 ```console
 # -fPIC: This stands for "Position Independent Code". It generates machine code that can be loaded at any memory address.
 
@@ -26,6 +28,7 @@ gcc -fPIC -shared -o libmy_shared_lib.so my_shared_lib.c
 ```
 
 ### Create Main Program
+
 main.c
 ```C
 #include <stdio.h>
@@ -66,7 +69,8 @@ int main() {
     return 0;
 }
 ```
-Compile the Main Program
+
+compile the Main Program
 ```console
 # -ldl: This tells the linker to link against the libdl library. The libdl library provides functions for dynamic linking, such as dlopen, dlsym, and dlclose
 
@@ -74,6 +78,7 @@ gcc -o main main.c -ldl
 ```
 
 ## MakeFile
+
 ```makefile
 # Compiler
 CC = gcc
@@ -113,6 +118,7 @@ clean:
 ```
 
 ## CMake
+
 ```cmake
 cmake_minimum_required(VERSION 3.10)
 project(ExampleProject)
@@ -135,6 +141,7 @@ target_link_libraries(main
 ```
 
 ## Meson
+
 ```meson
 project('ExampleProject', 'c')
 

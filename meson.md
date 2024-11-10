@@ -3,11 +3,11 @@
 
 folder structure
 ```console
-build
-include
-src
-meson.build
-meson.options
+```console
+├── build
+├── include
+├── src
+└── CMakeLists.txt
 ```
 
 command to build
