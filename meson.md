@@ -1,7 +1,7 @@
 
 ## Meson
 
-structure
+folder structure
 ```console
 build
 include
@@ -14,10 +14,19 @@ command to build
 ```console
 # generate ...
 meson build -D<define variable>=<value>
-# ninja
+
+# then ninja build
 cd build
 ninja
 ninja install
+# ninja test and install
+ninja test
+sudo ninja install
+
+# another way to trigger ninja
+meson compile -C build
+meson test -C build
+sudo meson install -C build
 
 # to setup and install dependency before build
 meson setup build

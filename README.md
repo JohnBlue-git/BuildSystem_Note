@@ -82,6 +82,9 @@ Dynamic Link Libraries (.dll):
   - Simplifies updates; only the DLL needs to be updated instead of every program that uses it.
   - Enables modular program design.
 
+Sample of Dynamic linking or loading in C:
+[dynamic_linking_loading.md](./dynamic_linking_loading.md)
+
 Reference:
 https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/
 

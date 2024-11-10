@@ -1,7 +1,7 @@
 
 ## CMake
 
-structure
+folder structure
 ```console
 build
 include
